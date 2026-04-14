@@ -3,93 +3,148 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin — Tienda Club Rugby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Admin — Tienda Pura Malta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b1020;
-      --panel: #121933;
-      --card: #11182f;
-      --panel-2: #182142;
-      --text: #f5f7ff;
-      --muted: #b8c2e0;
-      --line: rgba(255,255,255,.08);
-      --brand: #7c5cff;
-      --brand-2: #50d4ff;
-      --ok: #21c17a;
-      --danger: #ff5f7a;
-      --shadow: 0 18px 50px rgba(0,0,0,.28);
-      --radius: 18px;
+      --bg:      #0C0D12;
+      --panel:   #111318;
+      --panel-2: #181B22;
+      --card:    #0E1019;
+      --text:    #E8EDF8;
+      --muted:   #8A93B0;
+      --line:    rgba(26,123,196,.14);
+      --blue:    #1A7BC4;
+      --blue-l:  #3DA5F0;
+      --blue-d:  #0E3A6E;
+      --ok:      #21c17a;
+      --danger:  #ff5f7a;
+      --shadow:  0 18px 50px rgba(0,0,0,.38);
+      --radius:  16px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
+
     body{
-      font-family:'Montserrat',system-ui,sans-serif;
-      background:
-        radial-gradient(circle at top left,rgba(124,92,255,.16),transparent 30%),
-        radial-gradient(circle at top right,rgba(80,212,255,.12),transparent 30%),
-        linear-gradient(180deg,#07101e 0%,#0b1020 100%);
+      font-family:'DM Sans',sans-serif;
+      background: var(--bg);
       color:var(--text);
       min-height:100dvh;
+    }
+
+    /* noise */
+    body::after{
+      content:'';
+      position:fixed;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events:none;z-index:9998;opacity:.5;
     }
 
     img{display:block;max-width:100%}
     button,input,select,textarea{font:inherit}
     a{color:inherit;text-decoration:none}
 
+    /* ── TOPBAR ── */
     .topbar{
       position:sticky;top:0;z-index:100;
-      backdrop-filter:blur(14px);
-      background:rgba(7,16,30,.82);
+      backdrop-filter:blur(16px);
+      background:rgba(10,11,16,.9);
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
       width:min(1200px,calc(100% - 24px));
       margin:0 auto;
       display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:14px 0;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .badge{
-      width:46px;height:46px;border-radius:14px;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      display:grid;place-items:center;font-weight:800;font-size:1rem;
-    }
-    .brand h1{font-size:1.1rem;line-height:1.1}
-    .brand p{color:var(--muted);font-size:.82rem;margin-top:2px}
-    #logoutBtn{
-      height:40px;padding:0 16px;border:0;border-radius:12px;
-      background:rgba(255,95,122,.15);color:#ff8fa4;font-weight:700;cursor:pointer;
+      padding:12px 0;
     }
 
+    .brand{display:flex;align-items:center;gap:14px}
+
+    .brand-shield{
+      height:42px;width:auto;
+      filter:drop-shadow(0 0 8px rgba(61,165,240,.4));
+    }
+
+    .brand-text h1{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(16px,2vw,20px);
+      letter-spacing:4px;color:var(--blue-l);line-height:1;
+    }
+    .brand-text p{color:var(--muted);font-size:.8rem;margin-top:2px;letter-spacing:.5px}
+
+    .topbar-actions{display:flex;align-items:center;gap:10px}
+
+    #logoutBtn{
+      height:38px;padding:0 14px;border:0;border-radius:10px;
+      background:rgba(255,95,122,.12);color:#ff8fa4;
+      font-size:13px;letter-spacing:.5px;cursor:pointer;
+      transition:background .2s;
+    }
+    #logoutBtn:hover{background:rgba(255,95,122,.22)}
+
+    /* ── LOGIN OVERLAY ── */
     #loginOverlay{
       position:fixed;inset:0;z-index:500;
-      background:rgba(7,16,30,.97);
+      background:rgba(6,6,8,.97);
       display:flex;align-items:center;justify-content:center;
     }
+
     .login-box{
       background:var(--panel);
       border:1px solid var(--line);
-      border-radius:28px;
-      padding:40px 36px;
-      width:min(400px,calc(100% - 32px));
+      border-radius:24px;
+      padding:44px 40px;
+      width:min(420px,calc(100% - 32px));
       box-shadow:var(--shadow);
-      display:flex;flex-direction:column;gap:20px;
+      display:flex;flex-direction:column;gap:22px;
+      position:relative;overflow:hidden;
     }
-    .login-box h2{font-size:1.5rem;text-align:center}
-    .login-box p{color:var(--muted);font-size:.9rem;text-align:center;line-height:1.6}
 
+    /* Cruz de Malta decorativa login */
+    .login-box::before{
+      content:'';
+      position:absolute;top:-40px;right:-40px;
+      width:180px;height:180px;
+      opacity:.03;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%233DA5F0' d='M77,0L123,0L123,54L146,31L169,54L146,77L200,77L200,123L146,123L169,146L146,169L123,146L123,200L77,200L77,146L54,169L31,146L54,123L0,123L0,77L54,77L31,54L54,31L77,54Z'/%3E%3C/svg%3E") center/contain no-repeat;
+      pointer-events:none;
+    }
+
+    .login-logo{
+      display:flex;flex-direction:column;align-items:center;gap:12px;
+    }
+    .login-logo img{
+      height:80px;width:auto;
+      filter:drop-shadow(0 0 20px rgba(26,123,196,.5));
+    }
+    .login-logo h2{
+      font-family:'Anton',sans-serif;
+      font-size:28px;letter-spacing:2px;color:var(--text);text-align:center;
+    }
+    .login-logo p{
+      color:var(--muted);font-size:.88rem;text-align:center;line-height:1.6;margin-top:-6px;
+    }
+
+    /* ── WRAP ── */
     .wrap{width:min(1200px,calc(100% - 24px));margin:0 auto}
     .main-content{padding:28px 0 80px}
 
+    /* ── SECTION HEADER ── */
     .section-header{
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;flex-wrap:wrap;margin-bottom:20px;
     }
-    .section-header h2{font-size:1.4rem}
-    .section-header p{color:var(--muted);font-size:.88rem;margin-top:4px}
 
+    .section-header h2{
+      font-family:'Anton',sans-serif;
+      font-size:clamp(28px,4vw,42px);
+      letter-spacing:-1px;color:var(--text);line-height:.95;
+    }
+    .section-header h2 em{color:var(--blue-l);font-style:normal}
+    .section-header p{color:var(--muted);font-size:.84rem;margin-top:4px;font-weight:300}
+
+    /* ── TABLE ── */
     .table-wrap{
       background:var(--panel);
       border:1px solid var(--line);
@@ -97,28 +152,39 @@
       overflow:hidden;
       box-shadow:var(--shadow);
     }
+
     table{width:100%;border-collapse:collapse}
+
     thead th{
       padding:14px 16px;
-      text-align:left;font-size:.76rem;font-weight:700;
-      text-transform:uppercase;letter-spacing:.07em;
-      color:var(--muted);border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.025);
+      text-align:left;font-size:.7rem;font-weight:500;
+      text-transform:uppercase;letter-spacing:2.5px;
+      color:var(--blue);border-bottom:1px solid var(--line);
+      background:rgba(26,123,196,.05);
     }
+
     tbody tr{border-bottom:1px solid var(--line);transition:background .15s}
     tbody tr:last-child{border-bottom:0}
-    tbody tr:hover{background:rgba(255,255,255,.03)}
-    td{padding:10px 16px;font-size:.9rem;vertical-align:middle}
+    tbody tr:hover{background:rgba(26,123,196,.04)}
+
+    td{padding:10px 16px;font-size:.88rem;vertical-align:middle}
+
     .thumb{width:52px;height:52px;object-fit:cover;border-radius:10px;background:var(--panel-2)}
     .thumb-placeholder{
       width:52px;height:52px;border-radius:10px;background:var(--panel-2);
-      display:grid;place-items:center;color:var(--muted);font-size:.75rem
+      display:grid;place-items:center;color:var(--muted);font-size:.7rem;
+      font-style:italic;
     }
-    .badge-active,.badge-inactive{
-      display:inline-block;padding:3px 10px;border-radius:999px;font-size:.76rem;font-weight:700;
+
+    .badge-active{
+      display:inline-block;padding:3px 11px;border-radius:999px;font-size:.72rem;font-weight:500;
+      background:rgba(33,193,122,.12);color:#21c17a;letter-spacing:.5px;
     }
-    .badge-active{background:rgba(33,193,122,.15);color:#21c17a}
-    .badge-inactive{background:rgba(255,95,122,.12);color:#ff8fa4}
+    .badge-inactive{
+      display:inline-block;padding:3px 11px;border-radius:999px;font-size:.72rem;font-weight:500;
+      background:rgba(255,95,122,.1);color:#ff8fa4;letter-spacing:.5px;
+    }
+
     .actions-cell{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
     @media(max-width:760px){
@@ -126,169 +192,224 @@
       td{padding:8px 10px}
     }
 
+    /* ── OVERLAY ── */
     .overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,.52);
+      position:fixed;inset:0;background:rgba(0,0,0,.6);
       opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:190;
     }
     .overlay.open{opacity:1;pointer-events:auto}
 
+    /* ── DRAWER ── */
     .drawer{
       position:fixed;top:0;right:0;
       width:min(540px,100vw);height:100dvh;
-      background:#0d1430;border-left:1px solid var(--line);
-      box-shadow:-20px 0 50px rgba(0,0,0,.36);
+      background:var(--panel);
+      border-left:1px solid var(--line);
+      box-shadow:-20px 0 60px rgba(0,0,0,.5);
       transform:translateX(100%);transition:transform .28s ease;
       z-index:200;display:grid;grid-template-rows:auto 1fr auto;
     }
     .drawer.open{transform:translateX(0)}
+
     .drawer-head{
       padding:18px 20px;
       border-bottom:1px solid var(--line);
+      background:rgba(26,123,196,.05);
       display:flex;justify-content:space-between;align-items:center;
     }
-    .drawer-head h3{font-size:1.1rem}
+    .drawer-head h3{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:22px;letter-spacing:3px;color:var(--blue-l);
+    }
+
     .drawer-body{overflow-y:auto;padding:20px}
+
     .drawer-foot{
       padding:16px 20px;border-top:1px solid var(--line);
+      background:rgba(26,123,196,.04);
       display:flex;gap:10px;
     }
 
+    /* ── FIELDS ── */
     .field{margin-bottom:16px}
     .field label{
-      display:block;font-size:.74rem;font-weight:700;
-      text-transform:uppercase;letter-spacing:.07em;
-      color:#c4cff3;margin-bottom:6px;
+      display:block;font-size:.68rem;font-weight:500;
+      text-transform:uppercase;letter-spacing:2px;
+      color:var(--blue);margin-bottom:6px;
     }
+
     .field input,.field select,.field textarea{
-      width:100%;padding:12px 14px;
+      width:100%;padding:11px 14px;
       background:var(--panel-2);border:1px solid var(--line);
-      border-radius:12px;color:var(--text);outline:none;
+      border-radius:10px;color:var(--text);outline:none;
       transition:border-color .2s;
+      font-size:14px;
     }
     .field input:focus,.field select:focus,.field textarea:focus{
-      border-color:rgba(124,92,255,.5);
+      border-color:rgba(61,165,240,.45);
     }
     .field textarea{min-height:80px;resize:vertical;line-height:1.5}
     .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
+    /* ── UPLOAD ZONE ── */
     .upload-zone{
-      border:2px dashed rgba(124,92,255,.35);
-      border-radius:14px;
-      padding:24px;
+      border:1px dashed rgba(26,123,196,.35);
+      border-radius:12px;
+      padding:22px;
       text-align:center;
       cursor:pointer;
       transition:border-color .2s,background .2s;
       position:relative;
-      background:rgba(124,92,255,.04);
+      background:rgba(26,123,196,.03);
     }
     .upload-zone:hover,.upload-zone.drag{
-      border-color:rgba(124,92,255,.7);
-      background:rgba(124,92,255,.1);
+      border-color:rgba(61,165,240,.65);
+      background:rgba(26,123,196,.08);
     }
     .upload-zone input[type=file]{
       position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
     }
-    .upload-zone p{color:var(--muted);font-size:.88rem;line-height:1.6}
+    .upload-zone p{color:var(--muted);font-size:.85rem;line-height:1.6}
+
     #uploadPreview{
       width:100%;max-height:200px;object-fit:contain;
       border-radius:10px;margin-top:14px;display:none;
     }
-    .upload-status{font-size:.82rem;margin-top:8px;min-height:18px}
+    .upload-status{font-size:.8rem;margin-top:8px;min-height:18px;letter-spacing:.3px}
     .upload-status.ok{color:var(--ok)}
     .upload-status.err{color:var(--danger)}
 
+    /* ── BUTTONS ── */
     .btn{
-      height:46px;padding:0 20px;border:0;border-radius:13px;
-      font-weight:800;cursor:pointer;transition:transform .15s,opacity .15s;
-      white-space:nowrap;
+      height:44px;padding:0 18px;border:0;border-radius:11px;
+      cursor:pointer;transition:transform .15s,opacity .15s,background .2s;
+      white-space:nowrap;font-size:13px;letter-spacing:.5px;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0)}
-    .btn-primary{background:linear-gradient(135deg,var(--brand),#5d8bff);color:#fff}
-    .btn-ghost{background:rgba(255,255,255,.08);color:var(--text)}
-    .btn-danger{background:rgba(255,95,122,.15);color:#ff8fa4}
-    .btn-ok{background:rgba(33,193,122,.15);color:#21c17a}
-    .btn-sm{height:34px;padding:0 12px;font-size:.82rem;border-radius:10px}
 
+    .btn-primary{
+      background:linear-gradient(135deg,var(--blue-d),var(--blue));
+      color:#fff;border:1px solid rgba(61,165,240,.2);
+      font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;
+    }
+    .btn-primary:hover{
+      background:linear-gradient(135deg,var(--blue),var(--blue-l));
+      box-shadow:0 6px 20px rgba(26,123,196,.35);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,.06);color:var(--muted);
+      border:1px solid var(--line);
+    }
+    .btn-ghost:hover{background:rgba(255,255,255,.1);color:var(--text)}
+
+    .btn-danger{background:rgba(255,95,122,.12);color:#ff8fa4;border:1px solid rgba(255,95,122,.2)}
+    .btn-danger:hover{background:rgba(255,95,122,.22)}
+
+    .btn-ok{background:rgba(33,193,122,.12);color:#21c17a;border:1px solid rgba(33,193,122,.2)}
+    .btn-ok:hover{background:rgba(33,193,122,.22)}
+
+    .btn-sm{height:34px;padding:0 12px;font-size:12px;border-radius:9px;letter-spacing:.5px}
+
+    /* ── LOADER ── */
     .loader{
-      display:flex;gap:8px;align-items:center;justify-content:center;
-      padding:60px 20px;color:var(--muted);font-size:.9rem;
+      display:flex;gap:10px;align-items:center;justify-content:center;
+      padding:60px 20px;color:var(--muted);font-size:.88rem;
+      font-style:italic;
     }
     .spinner{
-      width:20px;height:20px;border:2px solid rgba(255,255,255,.1);
-      border-top-color:var(--brand);border-radius:50%;
+      width:18px;height:18px;
+      border:2px solid rgba(26,123,196,.2);
+      border-top-color:var(--blue-l);
+      border-radius:50%;
       animation:spin .7s linear infinite;
+      flex-shrink:0;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
 
+    /* ── TOAST ── */
     .toast{
       position:fixed;left:50%;bottom:20px;
       transform:translateX(-50%) translateY(20px);
-      opacity:0;pointer-events:none;transition:.25s ease;z-index:400;
-      background:rgba(10,16,30,.95);color:white;
-      border:1px solid rgba(255,255,255,.1);border-radius:999px;
-      padding:12px 20px;font-weight:700;font-size:.9rem;
+      opacity:0;pointer-events:none;transition:.25s ease;z-index:9999;
+      background:rgba(10,11,16,.96);color:var(--text);
+      border:1px solid rgba(61,165,240,.2);border-radius:999px;
+      padding:11px 20px;font-size:.85rem;letter-spacing:.3px;
       box-shadow:var(--shadow);max-width:calc(100% - 24px);text-align:center;
     }
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+    /* ── CONFIRM MODAL ── */
     #confirmModal{
       position:fixed;inset:0;z-index:600;
-      background:rgba(0,0,0,.6);
+      background:rgba(0,0,0,.65);
       display:none;align-items:center;justify-content:center;
     }
     #confirmModal.open{display:flex}
+
     .confirm-box{
-      background:var(--panel);border:1px solid var(--line);
-      border-radius:22px;padding:32px 28px;
-      width:min(380px,calc(100% - 32px));box-shadow:var(--shadow);
+      background:var(--panel);
+      border:1px solid rgba(255,95,122,.2);
+      border-radius:20px;padding:32px 28px;
+      width:min(380px,calc(100% - 32px));
+      box-shadow:var(--shadow);
       display:flex;flex-direction:column;gap:16px;
     }
-    .confirm-box h4{font-size:1.1rem}
-    .confirm-box p{color:var(--muted);font-size:.9rem;line-height:1.55}
+    .confirm-box h4{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:22px;letter-spacing:2px;color:#ff8fa4;
+    }
+    .confirm-box p{color:var(--muted);font-size:.88rem;line-height:1.6;font-weight:300}
     .confirm-actions{display:flex;gap:10px}
     .confirm-actions .btn{flex:1}
   </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginOverlay">
   <div class="login-box">
-    <h2>Panel Administrador</h2>
-    <p>Ingresá la clave para administrar los productos de la tienda.</p>
+    <div class="login-logo">
+      <img src="./logo-pura-malta.png" alt="Pura Malta" onerror="this.style.display='none'">
+      <h2>PANEL ADMIN</h2>
+      <p>Ingresá la clave para administrar<br>los productos de la tienda.</p>
+    </div>
     <div class="field">
       <label>Clave de acceso</label>
       <input type="password" id="keyInput" placeholder="••••••••" autocomplete="current-password"/>
     </div>
-    <button class="btn btn-primary" id="loginBtn" style="width:100%">Ingresar</button>
-    <p id="loginError" style="color:var(--danger);font-size:.88rem;text-align:center;min-height:18px"></p>
+    <button class="btn btn-primary" id="loginBtn" style="width:100%">INGRESAR</button>
+    <p id="loginError" style="color:var(--danger);font-size:.84rem;text-align:center;min-height:18px"></p>
   </div>
 </div>
 
+<!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">
-      <div class="badge">RC</div>
-      <div>
-        <h1>Admin — Tienda Club Rugby</h1>
-        <p>Panel de productos</p>
+      <img class="brand-shield" src="./logo-pura-malta.png" alt="Pura Malta" onerror="this.style.display='none'">
+      <div class="brand-text">
+        <h1>PURA MALTA</h1>
+        <p>Panel de administración</p>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px">
+    <div class="topbar-actions">
       <a href="index.html" class="btn btn-ghost btn-sm">Ver tienda →</a>
       <button id="logoutBtn">Cerrar sesión</button>
     </div>
   </div>
 </header>
 
+<!-- MAIN -->
 <main class="main-content">
   <div class="wrap">
     <div class="section-header">
       <div>
-        <h2>Productos</h2>
+        <h2>PROD<em>UCTOS</em></h2>
         <p id="productCount">Cargando...</p>
       </div>
-      <button class="btn btn-primary" id="addBtn">+ Nuevo producto</button>
+      <button class="btn btn-primary" id="addBtn">+ NUEVO PRODUCTO</button>
     </div>
 
     <div class="table-wrap">
@@ -299,11 +420,13 @@
   </div>
 </main>
 
+<!-- DRAWER OVERLAY -->
 <div class="overlay" id="drawerOverlay"></div>
 
+<!-- DRAWER -->
 <aside class="drawer" id="productDrawer">
   <div class="drawer-head">
-    <h3 id="drawerTitle">Nuevo producto</h3>
+    <h3 id="drawerTitle">NUEVO PRODUCTO</h3>
     <button class="btn btn-ghost btn-sm" id="closeDrawerBtn">Cerrar</button>
   </div>
 
@@ -363,13 +486,14 @@
 
   <div class="drawer-foot">
     <button class="btn btn-ghost" id="cancelDrawerBtn" style="flex:1">Cancelar</button>
-    <button class="btn btn-primary" id="saveBtn" style="flex:2">Guardar producto</button>
+    <button class="btn btn-primary" id="saveBtn" style="flex:2">GUARDAR PRODUCTO</button>
   </div>
 </aside>
 
+<!-- CONFIRM DELETE -->
 <div id="confirmModal">
   <div class="confirm-box">
-    <h4>¿Eliminar producto?</h4>
+    <h4>¿ELIMINAR PRODUCTO?</h4>
     <p>Esta acción no se puede deshacer. El producto será eliminado definitivamente.</p>
     <div class="confirm-actions">
       <button class="btn btn-ghost" id="cancelDeleteBtn">Cancelar</button>
@@ -393,9 +517,7 @@
 
   function fmt(v) {
     return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: CURRENCY,
-      maximumFractionDigits: 0
+      style: 'currency', currency: CURRENCY, maximumFractionDigits: 0
     }).format(v || 0);
   }
 
@@ -414,28 +536,18 @@
       const cbName = 'jsonp_callback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
       const script = document.createElement('script');
 
-      window[cbName] = (data) => {
-        cleanup();
-        resolve(data);
-      };
+      window[cbName] = (data) => { cleanup(); resolve(data); };
 
       function cleanup() {
-        try { delete window[cbName]; } catch (e) {}
+        try { delete window[cbName]; } catch(e) {}
         if (script.parentNode) script.parentNode.removeChild(script);
         clearTimeout(timer);
       }
 
       script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
-      script.onerror = () => {
-        cleanup();
-        reject(new Error('Error de conexión con la API'));
-      };
+      script.onerror = () => { cleanup(); reject(new Error('Error de conexión con la API')); };
 
-      const timer = setTimeout(() => {
-        cleanup();
-        reject(new Error('Timeout en JSONP'));
-      }, 15000);
-
+      const timer = setTimeout(() => { cleanup(); reject(new Error('Timeout en JSONP')); }, 15000);
       document.body.appendChild(script);
     });
   }
@@ -468,7 +580,7 @@
     } catch (error) {
       err.textContent = 'Error de conexión con la API.';
     } finally {
-      btn.textContent = 'Ingresar';
+      btn.textContent = 'INGRESAR';
       btn.disabled = false;
     }
   }
@@ -491,7 +603,7 @@
       renderTable();
     } catch (err) {
       document.getElementById('tableBody').innerHTML =
-        `<div class="loader" style="color:var(--danger)">Error al cargar: ${err.message}</div>`;
+        `<div class="loader" style="color:var(--danger);font-style:italic">Error al cargar: ${err.message}</div>`;
     }
   }
 
@@ -502,9 +614,9 @@
 
     if (!count) {
       document.getElementById('tableBody').innerHTML = `
-        <div class="loader" style="flex-direction:column;gap:8px">
+        <div class="loader" style="flex-direction:column;gap:10px">
           <span>No hay productos todavía.</span>
-          <button class="btn btn-primary btn-sm" onclick="openDrawer()">Agregar el primero</button>
+          <button class="btn btn-primary btn-sm" onclick="openDrawer()">+ Agregar el primero</button>
         </div>`;
       return;
     }
@@ -530,14 +642,13 @@
                   : `<div class="thumb-placeholder">sin foto</div>`}
               </td>
               <td>
-                <strong style="font-size:.95rem">${escapeHtml(p.title || '')}</strong>
-                <br>
-                <span style="color:var(--muted);font-size:.8rem">
+                <strong style="font-size:.9rem">${escapeHtml(p.title || '')}</strong><br>
+                <span style="color:var(--muted);font-size:.78rem;font-weight:300">
                   ${escapeHtml(p.description ? p.description.substring(0, 60) + (p.description.length > 60 ? '…' : '') : '')}
                 </span>
               </td>
               <td class="hide-mobile">${fmt(Number(p.price) || 0)}</td>
-              <td class="hide-mobile" style="color:var(--muted);font-size:.82rem">
+              <td class="hide-mobile" style="color:var(--muted);font-size:.8rem">
                 ${Array.isArray(p.sizes) && p.sizes.length ? escapeHtml(p.sizes.join(', ')) : '—'}
               </td>
               <td>
@@ -547,11 +658,11 @@
               </td>
               <td>
                 <div class="actions-cell">
-                  <button class="btn btn-ghost btn-sm" onclick="openDrawer('${String(p.id).replace(/'/g, "\\'")}')">Editar</button>
-                  <button class="btn btn-sm ${p.active ? 'btn-ok' : 'btn-ghost'}" onclick="toggleProduct('${String(p.id).replace(/'/g, "\\'")}')">
+                  <button class="btn btn-ghost btn-sm" onclick="openDrawer('${String(p.id).replace(/'/g,"\\'")}')">Editar</button>
+                  <button class="btn btn-sm ${p.active ? 'btn-ok' : 'btn-ghost'}" onclick="toggleProduct('${String(p.id).replace(/'/g,"\\'")}')">
                     ${p.active ? '✓ Activo' : '○ Inactivo'}
                   </button>
-                  <button class="btn btn-danger btn-sm" onclick="askDelete('${String(p.id).replace(/'/g, "\\'")}')">Eliminar</button>
+                  <button class="btn btn-danger btn-sm" onclick="askDelete('${String(p.id).replace(/'/g,"\\'")}')">Eliminar</button>
                 </div>
               </td>
             </tr>
@@ -562,7 +673,7 @@
 
   function openDrawer(id = null) {
     editingId = id;
-    const drawer = document.getElementById('productDrawer');
+    const drawer  = document.getElementById('productDrawer');
     const overlay = document.getElementById('drawerOverlay');
 
     document.getElementById('uploadStatus').textContent = '';
@@ -571,40 +682,27 @@
     if (id) {
       const p = products.find(x => String(x.id) === String(id));
       if (!p) return;
-
-      document.getElementById('drawerTitle').textContent = 'Editar producto';
-      document.getElementById('fieldId').value = p.id || '';
-      document.getElementById('fieldTitle').value = p.title || '';
-      document.getElementById('fieldPrice').value = p.price || '';
-      document.getElementById('fieldDesc').value = p.description || '';
-      document.getElementById('fieldSizes').value = Array.isArray(p.sizes) ? p.sizes.join(', ') : '';
+      document.getElementById('drawerTitle').textContent = 'EDITAR PRODUCTO';
+      document.getElementById('fieldId').value     = p.id || '';
+      document.getElementById('fieldTitle').value  = p.title || '';
+      document.getElementById('fieldPrice').value  = p.price || '';
+      document.getElementById('fieldDesc').value   = p.description || '';
+      document.getElementById('fieldSizes').value  = Array.isArray(p.sizes)  ? p.sizes.join(', ')  : '';
       document.getElementById('fieldColors').value = Array.isArray(p.colors) ? p.colors.join(', ') : '';
-      document.getElementById('fieldImage').value = p.image || '';
+      document.getElementById('fieldImage').value  = p.image || '';
       document.getElementById('fieldActive').value = p.active ? 'true' : 'false';
 
       const prev = document.getElementById('uploadPreview');
-      if (p.image) {
-        prev.src = p.image;
-        prev.style.display = 'block';
-      } else {
-        prev.style.display = 'none';
-        prev.removeAttribute('src');
-      }
+      if (p.image) { prev.src = p.image; prev.style.display = 'block'; }
+      else { prev.style.display = 'none'; prev.removeAttribute('src'); }
     } else {
-      document.getElementById('drawerTitle').textContent = 'Nuevo producto';
-      document.getElementById('fieldId').value = '';
-      document.getElementById('fieldTitle').value = '';
-      document.getElementById('fieldPrice').value = '';
-      document.getElementById('fieldDesc').value = '';
-      document.getElementById('fieldSizes').value = '';
-      document.getElementById('fieldColors').value = '';
-      document.getElementById('fieldImage').value = '';
+      document.getElementById('drawerTitle').textContent = 'NUEVO PRODUCTO';
+      ['fieldId','fieldTitle','fieldPrice','fieldDesc','fieldSizes','fieldColors','fieldImage'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
       document.getElementById('fieldActive').value = 'true';
-
       const prev = document.getElementById('uploadPreview');
-      prev.style.display = 'none';
-      prev.removeAttribute('src');
-
+      prev.style.display = 'none'; prev.removeAttribute('src');
       document.getElementById('fileInput').value = '';
     }
 
@@ -627,25 +725,18 @@
     const title = document.getElementById('fieldTitle').value.trim();
     const price = parseFloat(document.getElementById('fieldPrice').value);
 
-    if (!title) {
-      toast('El título es obligatorio.', false);
-      return;
-    }
-
-    if (isNaN(price) || price < 0) {
-      toast('El precio debe ser un número válido.', false);
-      return;
-    }
+    if (!title) { toast('El título es obligatorio.', false); return; }
+    if (isNaN(price) || price < 0) { toast('El precio debe ser un número válido.', false); return; }
 
     const product = {
-      id: document.getElementById('fieldId').value || ('p' + Date.now()),
+      id:          document.getElementById('fieldId').value || ('p' + Date.now()),
       title,
       description: document.getElementById('fieldDesc').value.trim(),
       price,
-      image: document.getElementById('fieldImage').value.trim(),
-      sizes: document.getElementById('fieldSizes').value.split(',').map(s => s.trim()).filter(Boolean),
-      colors: document.getElementById('fieldColors').value.split(',').map(s => s.trim()).filter(Boolean),
-      active: document.getElementById('fieldActive').value === 'true'
+      image:       document.getElementById('fieldImage').value.trim(),
+      sizes:       document.getElementById('fieldSizes').value.split(',').map(s=>s.trim()).filter(Boolean),
+      colors:      document.getElementById('fieldColors').value.split(',').map(s=>s.trim()).filter(Boolean),
+      active:      document.getElementById('fieldActive').value === 'true'
     };
 
     const btn = document.getElementById('saveBtn');
@@ -654,16 +745,16 @@
 
     try {
       const params = new URLSearchParams({
-        action: editingId ? 'update' : 'create',
-        key: adminKey,
-        id: product.id,
-        title: product.title,
+        action:      editingId ? 'update' : 'create',
+        key:         adminKey,
+        id:          product.id,
+        title:       product.title,
         description: product.description,
-        price: String(product.price),
-        image: product.image,
-        sizes: product.sizes.join(','),
-        colors: product.colors.join(','),
-        active: product.active ? 'true' : 'false'
+        price:       String(product.price),
+        image:       product.image,
+        sizes:       product.sizes.join(','),
+        colors:      product.colors.join(','),
+        active:      product.active ? 'true' : 'false'
       });
 
       const data = await jsonpRequest(`${API_URL}?${params.toString()}`);
@@ -675,7 +766,7 @@
     } catch (err) {
       toast('Error: ' + err.message, false);
     } finally {
-      btn.textContent = 'Guardar producto';
+      btn.textContent = 'GUARDAR PRODUCTO';
       btn.disabled = false;
     }
   });
@@ -685,7 +776,6 @@
       const data = await jsonpRequest(
         `${API_URL}?action=toggle&key=${encodeURIComponent(adminKey)}&id=${encodeURIComponent(id)}`
       );
-
       if (!data.ok) throw new Error(data.error || 'No se pudo cambiar el estado');
       toast('Estado actualizado ✓');
       await loadProducts();
@@ -706,14 +796,11 @@
 
   document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
     if (!deleteId) return;
-
     document.getElementById('confirmModal').classList.remove('open');
-
     try {
       const data = await jsonpRequest(
         `${API_URL}?action=delete&key=${encodeURIComponent(adminKey)}&id=${encodeURIComponent(deleteId)}`
       );
-
       if (!data.ok) throw new Error(data.error || 'No se pudo eliminar');
       toast('Producto eliminado');
       await loadProducts();
@@ -724,37 +811,23 @@
     }
   });
 
-  const fileInput = document.getElementById('fileInput');
+  const fileInput  = document.getElementById('fileInput');
   const uploadZone = document.getElementById('uploadZone');
   const uploadPrev = document.getElementById('uploadPreview');
   const uploadStat = document.getElementById('uploadStatus');
 
-  uploadZone.addEventListener('dragover', e => {
-    e.preventDefault();
-    uploadZone.classList.add('drag');
-  });
-
-  uploadZone.addEventListener('dragleave', () => {
-    uploadZone.classList.remove('drag');
-  });
-
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
   uploadZone.addEventListener('drop', e => {
-    e.preventDefault();
-    uploadZone.classList.remove('drag');
+    e.preventDefault(); uploadZone.classList.remove('drag');
     const file = e.dataTransfer.files[0];
     if (file) handleFile(file);
   });
-
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) handleFile(fileInput.files[0]);
-  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
 
   async function handleFile(file) {
     const reader = new FileReader();
-    reader.onload = e => {
-      uploadPrev.src = e.target.result;
-      uploadPrev.style.display = 'block';
-    };
+    reader.onload = e => { uploadPrev.src = e.target.result; uploadPrev.style.display = 'block'; };
     reader.readAsDataURL(file);
 
     uploadStat.textContent = 'Subiendo imagen...';
@@ -765,11 +838,7 @@
       fd.append('file', file);
       fd.append('upload_preset', CLOUDINARY_PRESET);
 
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
-        method: 'POST',
-        body: fd
-      });
-
+      const res  = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method:'POST', body:fd });
       const data = await res.json();
 
       if (data.secure_url) {
@@ -787,11 +856,8 @@
 
   function escapeHtml(str) {
     return String(str)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#039;');
+      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+      .replaceAll('"','&quot;').replaceAll("'","&#039;");
   }
 
   window.addEventListener('keydown', e => {
