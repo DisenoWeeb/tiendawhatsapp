@@ -6,9 +6,6 @@
   <title>Admin — Tienda Club Rugby</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════════════
-       VARIABLES & RESET
-    ═══════════════════════════════════════════════ */
     :root {
       --bg: #0b1020;
       --panel: #121933;
@@ -24,23 +21,23 @@
       --shadow: 0 18px 50px rgba(0,0,0,.28);
       --radius: 18px;
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
       font-family:'Montserrat',system-ui,sans-serif;
-      background:radial-gradient(circle at top left,rgba(124,92,255,.16),transparent 30%),
-                 radial-gradient(circle at top right,rgba(80,212,255,.12),transparent 30%),
-                 linear-gradient(180deg,#07101e 0%,#0b1020 100%);
+      background:
+        radial-gradient(circle at top left,rgba(124,92,255,.16),transparent 30%),
+        radial-gradient(circle at top right,rgba(80,212,255,.12),transparent 30%),
+        linear-gradient(180deg,#07101e 0%,#0b1020 100%);
       color:var(--text);
       min-height:100dvh;
     }
+
     img{display:block;max-width:100%}
     button,input,select,textarea{font:inherit}
     a{color:inherit;text-decoration:none}
 
-    /* ═══════════════════════════════════════════════
-       TOPBAR
-    ═══════════════════════════════════════════════ */
     .topbar{
       position:sticky;top:0;z-index:100;
       backdrop-filter:blur(14px);
@@ -66,9 +63,6 @@
       background:rgba(255,95,122,.15);color:#ff8fa4;font-weight:700;cursor:pointer;
     }
 
-    /* ═══════════════════════════════════════════════
-       LOGIN OVERLAY
-    ═══════════════════════════════════════════════ */
     #loginOverlay{
       position:fixed;inset:0;z-index:500;
       background:rgba(7,16,30,.97);
@@ -86,15 +80,9 @@
     .login-box h2{font-size:1.5rem;text-align:center}
     .login-box p{color:var(--muted);font-size:.9rem;text-align:center;line-height:1.6}
 
-    /* ═══════════════════════════════════════════════
-       WRAP
-    ═══════════════════════════════════════════════ */
     .wrap{width:min(1200px,calc(100% - 24px));margin:0 auto}
     .main-content{padding:28px 0 80px}
 
-    /* ═══════════════════════════════════════════════
-       SECTION HEADER + ADD BTN
-    ═══════════════════════════════════════════════ */
     .section-header{
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;flex-wrap:wrap;margin-bottom:20px;
@@ -102,9 +90,6 @@
     .section-header h2{font-size:1.4rem}
     .section-header p{color:var(--muted);font-size:.88rem;margin-top:4px}
 
-    /* ═══════════════════════════════════════════════
-       PRODUCT TABLE
-    ═══════════════════════════════════════════════ */
     .table-wrap{
       background:var(--panel);
       border:1px solid var(--line);
@@ -125,7 +110,10 @@
     tbody tr:hover{background:rgba(255,255,255,.03)}
     td{padding:10px 16px;font-size:.9rem;vertical-align:middle}
     .thumb{width:52px;height:52px;object-fit:cover;border-radius:10px;background:var(--panel-2)}
-    .thumb-placeholder{width:52px;height:52px;border-radius:10px;background:var(--panel-2);display:grid;place-items:center;color:var(--muted);font-size:.75rem}
+    .thumb-placeholder{
+      width:52px;height:52px;border-radius:10px;background:var(--panel-2);
+      display:grid;place-items:center;color:var(--muted);font-size:.75rem
+    }
     .badge-active,.badge-inactive{
       display:inline-block;padding:3px 10px;border-radius:999px;font-size:.76rem;font-weight:700;
     }
@@ -138,14 +126,12 @@
       td{padding:8px 10px}
     }
 
-    /* ═══════════════════════════════════════════════
-       DRAWER / MODAL
-    ═══════════════════════════════════════════════ */
     .overlay{
       position:fixed;inset:0;background:rgba(0,0,0,.52);
       opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:190;
     }
     .overlay.open{opacity:1;pointer-events:auto}
+
     .drawer{
       position:fixed;top:0;right:0;
       width:min(540px,100vw);height:100dvh;
@@ -167,9 +153,6 @@
       display:flex;gap:10px;
     }
 
-    /* ═══════════════════════════════════════════════
-       FORM FIELDS
-    ═══════════════════════════════════════════════ */
     .field{margin-bottom:16px}
     .field label{
       display:block;font-size:.74rem;font-weight:700;
@@ -188,9 +171,6 @@
     .field textarea{min-height:80px;resize:vertical;line-height:1.5}
     .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-    /* ═══════════════════════════════════════════════
-       UPLOAD ZONE
-    ═══════════════════════════════════════════════ */
     .upload-zone{
       border:2px dashed rgba(124,92,255,.35);
       border-radius:14px;
@@ -217,9 +197,6 @@
     .upload-status.ok{color:var(--ok)}
     .upload-status.err{color:var(--danger)}
 
-    /* ═══════════════════════════════════════════════
-       BUTTONS
-    ═══════════════════════════════════════════════ */
     .btn{
       height:46px;padding:0 20px;border:0;border-radius:13px;
       font-weight:800;cursor:pointer;transition:transform .15s,opacity .15s;
@@ -233,9 +210,6 @@
     .btn-ok{background:rgba(33,193,122,.15);color:#21c17a}
     .btn-sm{height:34px;padding:0 12px;font-size:.82rem;border-radius:10px}
 
-    /* ═══════════════════════════════════════════════
-       LOADER
-    ═══════════════════════════════════════════════ */
     .loader{
       display:flex;gap:8px;align-items:center;justify-content:center;
       padding:60px 20px;color:var(--muted);font-size:.9rem;
@@ -247,9 +221,6 @@
     }
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* ═══════════════════════════════════════════════
-       TOAST
-    ═══════════════════════════════════════════════ */
     .toast{
       position:fixed;left:50%;bottom:20px;
       transform:translateX(-50%) translateY(20px);
@@ -261,9 +232,6 @@
     }
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-    /* ═══════════════════════════════════════════════
-       CONFIRM MODAL
-    ═══════════════════════════════════════════════ */
     #confirmModal{
       position:fixed;inset:0;z-index:600;
       background:rgba(0,0,0,.6);
@@ -280,24 +248,10 @@
     .confirm-box p{color:var(--muted);font-size:.9rem;line-height:1.55}
     .confirm-actions{display:flex;gap:10px}
     .confirm-actions .btn{flex:1}
-
-    /* Config notice */
-    .config-notice{
-      background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.25);
-      border-radius:14px;padding:14px 18px;font-size:.88rem;color:#f9cb42;
-      line-height:1.6;margin-bottom:24px;
-    }
-    .config-notice code{
-      background:rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;
-      font-family:monospace;font-size:.86em;
-    }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════
-     LOGIN OVERLAY
-════════════════════════════════════════════════ -->
 <div id="loginOverlay">
   <div class="login-box">
     <h2>Panel Administrador</h2>
@@ -311,9 +265,6 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════
-     TOPBAR
-════════════════════════════════════════════════ -->
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">
@@ -330,18 +281,8 @@
   </div>
 </header>
 
-<!-- ════════════════════════════════════════════════
-     MAIN
-════════════════════════════════════════════════ -->
 <main class="main-content">
   <div class="wrap">
-    <!-- Aviso de configuración (se oculta automáticamente) -->
-    <div class="config-notice" id="configNotice">
-      ⚠️ <strong>Configurá antes de usar:</strong> En este archivo editá las constantes
-      <code>API_URL</code>, <code>CLOUDINARY_CLOUD</code> y <code>CLOUDINARY_PRESET</code>
-      al principio del &lt;script&gt;.
-    </div>
-
     <div class="section-header">
       <div>
         <h2>Productos</h2>
@@ -358,15 +299,14 @@
   </div>
 </main>
 
-<!-- ════════════════════════════════════════════════
-     DRAWER — FORMULARIO PRODUCTO
-════════════════════════════════════════════════ -->
 <div class="overlay" id="drawerOverlay"></div>
+
 <aside class="drawer" id="productDrawer">
   <div class="drawer-head">
     <h3 id="drawerTitle">Nuevo producto</h3>
     <button class="btn btn-ghost btn-sm" id="closeDrawerBtn">Cerrar</button>
   </div>
+
   <div class="drawer-body">
     <input type="hidden" id="fieldId"/>
 
@@ -402,13 +342,13 @@
       <div class="upload-zone" id="uploadZone">
         <input type="file" id="fileInput" accept="image/*"/>
         <p>📷 Arrastrá una foto acá<br><small>o hacé clic para seleccionar</small></p>
-        <img id="uploadPreview"/>
+        <img id="uploadPreview" alt="Vista previa"/>
       </div>
       <div class="upload-status" id="uploadStatus"></div>
     </div>
 
     <div class="field">
-      <label>URL de imagen (se completa automáticamente al subir)</label>
+      <label>URL de imagen</label>
       <input type="url" id="fieldImage" placeholder="https://res.cloudinary.com/..."/>
     </div>
 
@@ -420,19 +360,17 @@
       </select>
     </div>
   </div>
+
   <div class="drawer-foot">
     <button class="btn btn-ghost" id="cancelDrawerBtn" style="flex:1">Cancelar</button>
     <button class="btn btn-primary" id="saveBtn" style="flex:2">Guardar producto</button>
   </div>
 </aside>
 
-<!-- ════════════════════════════════════════════════
-     CONFIRM MODAL
-════════════════════════════════════════════════ -->
 <div id="confirmModal">
   <div class="confirm-box">
     <h4>¿Eliminar producto?</h4>
-    <p>Esta acción no se puede deshacer. El producto será eliminado definitivamente de la hoja de cálculo.</p>
+    <p>Esta acción no se puede deshacer. El producto será eliminado definitivamente.</p>
     <div class="confirm-actions">
       <button class="btn btn-ghost" id="cancelDeleteBtn">Cancelar</button>
       <button class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
@@ -443,374 +381,425 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ════════════════════════════════════════════════════════════════
-// ⚙️  CONFIGURACIÓN — EDITÁ ESTOS TRES VALORES
-// ════════════════════════════════════════════════════════════════
-const API_URL            = 'https://script.google.com/macros/s/AKfycbzhjaE7yi5gwfEHEVHlcmlL0trYkUE_E1Fr3GU4ZEwYk5JKa8AdiNnc-OUOLmfm-KcpXw/exec';       // URL del Apps Script
-const CLOUDINARY_CLOUD   = 'dwgwbdtud';                         // tu cuenta Cloudinary
-const CLOUDINARY_PRESET  = 'dra_bruzera_unsigned';                      // preset sin firma
-// ════════════════════════════════════════════════════════════════
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzhjaE7yi5gwfEHEVHlcmlL0trYkUE_E1Fr3GU4ZEwYk5JKa8AdiNnc-OUOLmfm-KcpXw/exec';
+  const CLOUDINARY_CLOUD = 'dwgwbdtud';
+  const CLOUDINARY_PRESET = 'dra_bruzera_unsigned';
+  const CURRENCY = 'ARS';
 
-const CURRENCY = 'ARS';
-let adminKey   = '';
-let products   = [];
-let editingId  = null;
-let deleteId   = null;
+  let adminKey = '';
+  let products = [];
+  let editingId = null;
+  let deleteId = null;
 
-// ── Ocultar aviso de config si está configurado ──────────────
-if (API_URL !== 'https://script.google.com/macros/s/AKfycbzhjaE7yi5gwfEHEVHlcmlL0trYkUE_E1Fr3GU4ZEwYk5JKa8AdiNnc-OUOLmfm-KcpXw/exec') {
-  document.getElementById('configNotice').style.display = 'none';
-}
+  function fmt(v) {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: CURRENCY,
+      maximumFractionDigits: 0
+    }).format(v || 0);
+  }
 
-// ── Formato de precio ────────────────────────────────────────
-function fmt(v) {
-  return new Intl.NumberFormat('es-AR',{style:'currency',currency:CURRENCY,maximumFractionDigits:0}).format(v||0);
-}
+  let toastTimer;
+  function toast(msg, ok = true) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.style.borderColor = ok ? 'rgba(33,193,122,.3)' : 'rgba(255,95,122,.3)';
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+  }
 
-// ── Toast ────────────────────────────────────────────────────
-let toastTimer;
-function toast(msg, ok = true) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.style.borderColor = ok ? 'rgba(33,193,122,.3)' : 'rgba(255,95,122,.3)';
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
-}
+  function jsonpRequest(url) {
+    return new Promise((resolve, reject) => {
+      const cbName = 'jsonp_callback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+      const script = document.createElement('script');
 
-// ════════════════════════════════════════════════════════════════
-// LOGIN
-// ════════════════════════════════════════════════════════════════
-document.getElementById('loginBtn').addEventListener('click', attemptLogin);
-document.getElementById('keyInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') attemptLogin();
-});
+      window[cbName] = (data) => {
+        cleanup();
+        resolve(data);
+      };
 
-async function attemptLogin() {
-  const key = document.getElementById('keyInput').value.trim();
-  if (!key) return;
-  document.getElementById('loginBtn').textContent = 'Verificando...';
-  document.getElementById('loginBtn').disabled = true;
-  try {
-    const res = await fetch(`${API_URL}?key=${encodeURIComponent(key)}`);
-    const data = await res.json();
-    if (data.ok) {
-      adminKey = key;
-      document.getElementById('loginOverlay').style.display = 'none';
-      await loadProducts();
-    } else {
-      document.getElementById('loginError').textContent = 'Clave incorrecta. Intentá de nuevo.';
+      function cleanup() {
+        try { delete window[cbName]; } catch (e) {}
+        if (script.parentNode) script.parentNode.removeChild(script);
+        clearTimeout(timer);
+      }
+
+      script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
+      script.onerror = () => {
+        cleanup();
+        reject(new Error('Error de conexión con la API'));
+      };
+
+      const timer = setTimeout(() => {
+        cleanup();
+        reject(new Error('Timeout en JSONP'));
+      }, 15000);
+
+      document.body.appendChild(script);
+    });
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+  document.getElementById('keyInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptLogin();
+  });
+
+  async function attemptLogin() {
+    const key = document.getElementById('keyInput').value.trim();
+    if (!key) return;
+
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginError');
+
+    btn.textContent = 'Verificando...';
+    btn.disabled = true;
+    err.textContent = '';
+
+    try {
+      const data = await jsonpRequest(`${API_URL}?action=list&key=${encodeURIComponent(key)}`);
+      if (data.ok) {
+        adminKey = key;
+        document.getElementById('loginOverlay').style.display = 'none';
+        await loadProducts();
+      } else {
+        err.textContent = 'Clave incorrecta. Intentá de nuevo.';
+      }
+    } catch (error) {
+      err.textContent = 'Error de conexión con la API.';
+    } finally {
+      btn.textContent = 'Ingresar';
+      btn.disabled = false;
     }
-  } catch {
-    document.getElementById('loginError').textContent = 'Error de conexión con la API.';
-  } finally {
-    document.getElementById('loginBtn').textContent = 'Ingresar';
-    document.getElementById('loginBtn').disabled = false;
   }
-}
 
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  adminKey = '';
-  document.getElementById('loginOverlay').style.display = 'flex';
-  document.getElementById('keyInput').value = '';
-  document.getElementById('loginError').textContent = '';
-});
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    adminKey = '';
+    document.getElementById('loginOverlay').style.display = 'flex';
+    document.getElementById('keyInput').value = '';
+    document.getElementById('loginError').textContent = '';
+  });
 
-// ════════════════════════════════════════════════════════════════
-// CARGAR PRODUCTOS
-// ════════════════════════════════════════════════════════════════
-async function loadProducts() {
-  document.getElementById('tableBody').innerHTML = '<div class="loader"><div class="spinner"></div> Cargando...</div>';
-  try {
-    const res  = await fetch(`${API_URL}?key=${encodeURIComponent(adminKey)}`);
-    const data = await res.json();
-    if (!data.ok) throw new Error(data.error);
-    products = data.products;
-    renderTable();
-  } catch(err) {
-    document.getElementById('tableBody').innerHTML = `<div class="loader" style="color:var(--danger)">Error al cargar: ${err.message}</div>`;
+  async function loadProducts() {
+    document.getElementById('tableBody').innerHTML =
+      '<div class="loader"><div class="spinner"></div> Cargando...</div>';
+
+    try {
+      const data = await jsonpRequest(`${API_URL}?action=list&key=${encodeURIComponent(adminKey)}`);
+      if (!data.ok) throw new Error(data.error || 'No se pudieron cargar productos');
+      products = Array.isArray(data.products) ? data.products : [];
+      renderTable();
+    } catch (err) {
+      document.getElementById('tableBody').innerHTML =
+        `<div class="loader" style="color:var(--danger)">Error al cargar: ${err.message}</div>`;
+    }
   }
-}
 
-// ════════════════════════════════════════════════════════════════
-// TABLA
-// ════════════════════════════════════════════════════════════════
-function renderTable() {
-  const count = products.length;
-  document.getElementById('productCount').textContent =
-    `${count} producto${count !== 1 ? 's' : ''} en total`;
+  function renderTable() {
+    const count = products.length;
+    document.getElementById('productCount').textContent =
+      `${count} producto${count !== 1 ? 's' : ''} en total`;
 
-  if (!count) {
+    if (!count) {
+      document.getElementById('tableBody').innerHTML = `
+        <div class="loader" style="flex-direction:column;gap:8px">
+          <span>No hay productos todavía.</span>
+          <button class="btn btn-primary btn-sm" onclick="openDrawer()">Agregar el primero</button>
+        </div>`;
+      return;
+    }
+
     document.getElementById('tableBody').innerHTML = `
-      <div class="loader" style="flex-direction:column;gap:8px">
-        <span>No hay productos todavía.</span>
-        <button class="btn btn-primary btn-sm" onclick="openDrawer()">Agregar el primero</button>
-      </div>`;
-    return;
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Producto</th>
+            <th class="hide-mobile">Precio</th>
+            <th class="hide-mobile">Talles</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${products.map(p => `
+            <tr>
+              <td>
+                ${p.image
+                  ? `<img class="thumb" src="${p.image}" alt="${escapeHtml(p.title || '')}" loading="lazy"/>`
+                  : `<div class="thumb-placeholder">sin foto</div>`}
+              </td>
+              <td>
+                <strong style="font-size:.95rem">${escapeHtml(p.title || '')}</strong>
+                <br>
+                <span style="color:var(--muted);font-size:.8rem">
+                  ${escapeHtml(p.description ? p.description.substring(0, 60) + (p.description.length > 60 ? '…' : '') : '')}
+                </span>
+              </td>
+              <td class="hide-mobile">${fmt(Number(p.price) || 0)}</td>
+              <td class="hide-mobile" style="color:var(--muted);font-size:.82rem">
+                ${Array.isArray(p.sizes) && p.sizes.length ? escapeHtml(p.sizes.join(', ')) : '—'}
+              </td>
+              <td>
+                <span class="${p.active ? 'badge-active' : 'badge-inactive'}">
+                  ${p.active ? 'Activo' : 'Inactivo'}
+                </span>
+              </td>
+              <td>
+                <div class="actions-cell">
+                  <button class="btn btn-ghost btn-sm" onclick="openDrawer('${String(p.id).replace(/'/g, "\\'")}')">Editar</button>
+                  <button class="btn btn-sm ${p.active ? 'btn-ok' : 'btn-ghost'}" onclick="toggleProduct('${String(p.id).replace(/'/g, "\\'")}')">
+                    ${p.active ? '✓ Activo' : '○ Inactivo'}
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="askDelete('${String(p.id).replace(/'/g, "\\'")}')">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>`;
   }
 
-  document.getElementById('tableBody').innerHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th>Foto</th>
-          <th>Producto</th>
-          <th class="hide-mobile">Precio</th>
-          <th class="hide-mobile">Talles</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${products.map(p => `
-          <tr>
-            <td>
-              ${p.image
-                ? `<img class="thumb" src="${p.image}" alt="${p.title}" loading="lazy"/>`
-                : `<div class="thumb-placeholder">sin foto</div>`}
-            </td>
-            <td>
-              <strong style="font-size:.95rem">${p.title}</strong>
-              <br><span style="color:var(--muted);font-size:.8rem">${p.description ? p.description.substring(0,60)+(p.description.length>60?'…':'') : ''}</span>
-            </td>
-            <td class="hide-mobile">${fmt(p.price)}</td>
-            <td class="hide-mobile" style="color:var(--muted);font-size:.82rem">${(p.sizes||[]).join(', ') || '—'}</td>
-            <td>
-              <span class="${p.active ? 'badge-active' : 'badge-inactive'}">
-                ${p.active ? 'Activo' : 'Inactivo'}
-              </span>
-            </td>
-            <td>
-              <div class="actions-cell">
-                <button class="btn btn-ghost btn-sm" onclick="openDrawer('${p.id}')">Editar</button>
-                <button class="btn btn-sm ${p.active ? 'btn-ok' : 'btn-ghost'}" onclick="toggleProduct('${p.id}')"
-                  title="${p.active ? 'Desactivar' : 'Activar'}">
-                  ${p.active ? '✓ Activo' : '○ Inactivo'}
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="askDelete('${p.id}')">Eliminar</button>
-              </div>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>`;
-}
+  function openDrawer(id = null) {
+    editingId = id;
+    const drawer = document.getElementById('productDrawer');
+    const overlay = document.getElementById('drawerOverlay');
 
-// ════════════════════════════════════════════════════════════════
-// DRAWER ABM
-// ════════════════════════════════════════════════════════════════
-function openDrawer(id = null) {
-  editingId = id;
-  const drawer  = document.getElementById('productDrawer');
-  const overlay = document.getElementById('drawerOverlay');
-
-  if (id) {
-    const p = products.find(x => x.id === id);
-    document.getElementById('drawerTitle').textContent = 'Editar producto';
-    document.getElementById('fieldId').value     = p.id;
-    document.getElementById('fieldTitle').value  = p.title;
-    document.getElementById('fieldPrice').value  = p.price;
-    document.getElementById('fieldDesc').value   = p.description;
-    document.getElementById('fieldSizes').value  = (p.sizes||[]).join(', ');
-    document.getElementById('fieldColors').value = (p.colors||[]).join(', ');
-    document.getElementById('fieldImage').value  = p.image || '';
-    document.getElementById('fieldActive').value = p.active ? 'true' : 'false';
-    const prev = document.getElementById('uploadPreview');
-    if (p.image) {
-      prev.src = p.image;
-      prev.style.display = 'block';
-    } else {
-      prev.style.display = 'none';
-    }
-  } else {
-    document.getElementById('drawerTitle').textContent = 'Nuevo producto';
-    ['fieldId','fieldTitle','fieldPrice','fieldDesc','fieldSizes',
-     'fieldColors','fieldImage'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('fieldActive').value = 'true';
-    document.getElementById('uploadPreview').style.display = 'none';
     document.getElementById('uploadStatus').textContent = '';
     document.getElementById('uploadStatus').className = 'upload-status';
-  }
 
-  drawer.classList.add('open');
-  overlay.classList.add('open');
-}
+    if (id) {
+      const p = products.find(x => String(x.id) === String(id));
+      if (!p) return;
 
-function closeDrawer() {
-  document.getElementById('productDrawer').classList.remove('open');
-  document.getElementById('drawerOverlay').classList.remove('open');
-  editingId = null;
-}
+      document.getElementById('drawerTitle').textContent = 'Editar producto';
+      document.getElementById('fieldId').value = p.id || '';
+      document.getElementById('fieldTitle').value = p.title || '';
+      document.getElementById('fieldPrice').value = p.price || '';
+      document.getElementById('fieldDesc').value = p.description || '';
+      document.getElementById('fieldSizes').value = Array.isArray(p.sizes) ? p.sizes.join(', ') : '';
+      document.getElementById('fieldColors').value = Array.isArray(p.colors) ? p.colors.join(', ') : '';
+      document.getElementById('fieldImage').value = p.image || '';
+      document.getElementById('fieldActive').value = p.active ? 'true' : 'false';
 
-document.getElementById('addBtn').addEventListener('click', () => openDrawer());
-document.getElementById('closeDrawerBtn').addEventListener('click', closeDrawer);
-document.getElementById('cancelDrawerBtn').addEventListener('click', closeDrawer);
-document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
-
-// ── Guardar ───────────────────────────────────────────────────
-document.getElementById('saveBtn').addEventListener('click', async () => {
-  const title = document.getElementById('fieldTitle').value.trim();
-  const price = parseFloat(document.getElementById('fieldPrice').value);
-
-  if (!title) { toast('El título es obligatorio.', false); return; }
-  if (isNaN(price) || price < 0) { toast('El precio debe ser un número válido.', false); return; }
-
-  const product = {
-    id:          document.getElementById('fieldId').value || ('p' + Date.now()),
-    title,
-    description: document.getElementById('fieldDesc').value.trim(),
-    price,
-    image:       document.getElementById('fieldImage').value.trim(),
-    sizes:       document.getElementById('fieldSizes').value.split(',').map(s=>s.trim()).filter(Boolean),
-    colors:      document.getElementById('fieldColors').value.split(',').map(s=>s.trim()).filter(Boolean),
-    active:      document.getElementById('fieldActive').value === 'true'
-  };
-
-  const btn = document.getElementById('saveBtn');
-  btn.textContent = 'Guardando...';
-  btn.disabled = true;
-
-  try {
-    const res  = await fetch(API_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        key: adminKey,
-        action: editingId ? 'update' : 'create',
-        product
-      })
-    });
-    const data = await res.json();
-    if (!data.ok) throw new Error(data.error);
-    toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓');
-    closeDrawer();
-    await loadProducts();
-  } catch(err) {
-    toast('Error: ' + err.message, false);
-  } finally {
-    btn.textContent = 'Guardar producto';
-    btn.disabled = false;
-  }
-});
-
-// ════════════════════════════════════════════════════════════════
-// TOGGLE ACTIVO / INACTIVO
-// ════════════════════════════════════════════════════════════════
-async function toggleProduct(id) {
-  try {
-    const res  = await fetch(API_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ key: adminKey, action: 'toggle', id })
-    });
-    const data = await res.json();
-    if (!data.ok) throw new Error(data.error);
-    toast('Estado actualizado ✓');
-    await loadProducts();
-  } catch(err) {
-    toast('Error: ' + err.message, false);
-  }
-}
-
-// ════════════════════════════════════════════════════════════════
-// ELIMINAR
-// ════════════════════════════════════════════════════════════════
-function askDelete(id) {
-  deleteId = id;
-  document.getElementById('confirmModal').classList.add('open');
-}
-
-document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
-  document.getElementById('confirmModal').classList.remove('open');
-  deleteId = null;
-});
-
-document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
-  if (!deleteId) return;
-  document.getElementById('confirmModal').classList.remove('open');
-  try {
-    const res  = await fetch(API_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ key: adminKey, action: 'delete', id: deleteId })
-    });
-    const data = await res.json();
-    if (!data.ok) throw new Error(data.error);
-    toast('Producto eliminado');
-    await loadProducts();
-  } catch(err) {
-    toast('Error: ' + err.message, false);
-  } finally {
-    deleteId = null;
-  }
-});
-
-// ════════════════════════════════════════════════════════════════
-// SUBIDA DE IMÁGENES — CLOUDINARY
-// ════════════════════════════════════════════════════════════════
-const fileInput   = document.getElementById('fileInput');
-const uploadZone  = document.getElementById('uploadZone');
-const uploadPrev  = document.getElementById('uploadPreview');
-const uploadStat  = document.getElementById('uploadStatus');
-
-// Drag & drop
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadZone.classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if (file) handleFile(file);
-});
-
-fileInput.addEventListener('change', () => {
-  if (fileInput.files[0]) handleFile(fileInput.files[0]);
-});
-
-async function handleFile(file) {
-  // Preview inmediata
-  const reader = new FileReader();
-  reader.onload = e => {
-    uploadPrev.src = e.target.result;
-    uploadPrev.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-
-  // Subir a Cloudinary
-  uploadStat.textContent = 'Subiendo imagen...';
-  uploadStat.className = 'upload-status';
-
-  try {
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('upload_preset', CLOUDINARY_PRESET);
-
-    const res  = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
-      method: 'POST',
-      body: fd
-    });
-    const data = await res.json();
-
-    if (data.secure_url) {
-      document.getElementById('fieldImage').value = data.secure_url;
-      uploadStat.textContent = '✓ Imagen subida exitosamente';
-      uploadStat.className = 'upload-status ok';
+      const prev = document.getElementById('uploadPreview');
+      if (p.image) {
+        prev.src = p.image;
+        prev.style.display = 'block';
+      } else {
+        prev.style.display = 'none';
+        prev.removeAttribute('src');
+      }
     } else {
-      throw new Error(data.error?.message || 'Error al subir');
-    }
-  } catch(err) {
-    uploadStat.textContent = '✗ Error: ' + err.message;
-    uploadStat.className = 'upload-status err';
-  }
-}
+      document.getElementById('drawerTitle').textContent = 'Nuevo producto';
+      document.getElementById('fieldId').value = '';
+      document.getElementById('fieldTitle').value = '';
+      document.getElementById('fieldPrice').value = '';
+      document.getElementById('fieldDesc').value = '';
+      document.getElementById('fieldSizes').value = '';
+      document.getElementById('fieldColors').value = '';
+      document.getElementById('fieldImage').value = '';
+      document.getElementById('fieldActive').value = 'true';
 
-// ── Teclado ───────────────────────────────────────────────────
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeDrawer();
-    document.getElementById('confirmModal').classList.remove('open');
+      const prev = document.getElementById('uploadPreview');
+      prev.style.display = 'none';
+      prev.removeAttribute('src');
+
+      document.getElementById('fileInput').value = '';
+    }
+
+    drawer.classList.add('open');
+    overlay.classList.add('open');
   }
-});
+
+  function closeDrawer() {
+    document.getElementById('productDrawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+    editingId = null;
+  }
+
+  document.getElementById('addBtn').addEventListener('click', () => openDrawer());
+  document.getElementById('closeDrawerBtn').addEventListener('click', closeDrawer);
+  document.getElementById('cancelDrawerBtn').addEventListener('click', closeDrawer);
+  document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+
+  document.getElementById('saveBtn').addEventListener('click', async () => {
+    const title = document.getElementById('fieldTitle').value.trim();
+    const price = parseFloat(document.getElementById('fieldPrice').value);
+
+    if (!title) {
+      toast('El título es obligatorio.', false);
+      return;
+    }
+
+    if (isNaN(price) || price < 0) {
+      toast('El precio debe ser un número válido.', false);
+      return;
+    }
+
+    const product = {
+      id: document.getElementById('fieldId').value || ('p' + Date.now()),
+      title,
+      description: document.getElementById('fieldDesc').value.trim(),
+      price,
+      image: document.getElementById('fieldImage').value.trim(),
+      sizes: document.getElementById('fieldSizes').value.split(',').map(s => s.trim()).filter(Boolean),
+      colors: document.getElementById('fieldColors').value.split(',').map(s => s.trim()).filter(Boolean),
+      active: document.getElementById('fieldActive').value === 'true'
+    };
+
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = 'Guardando...';
+    btn.disabled = true;
+
+    try {
+      const params = new URLSearchParams({
+        action: editingId ? 'update' : 'create',
+        key: adminKey,
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        price: String(product.price),
+        image: product.image,
+        sizes: product.sizes.join(','),
+        colors: product.colors.join(','),
+        active: product.active ? 'true' : 'false'
+      });
+
+      const data = await jsonpRequest(`${API_URL}?${params.toString()}`);
+      if (!data.ok) throw new Error(data.error || 'No se pudo guardar');
+
+      toast(editingId ? 'Producto actualizado ✓' : 'Producto creado ✓');
+      closeDrawer();
+      await loadProducts();
+    } catch (err) {
+      toast('Error: ' + err.message, false);
+    } finally {
+      btn.textContent = 'Guardar producto';
+      btn.disabled = false;
+    }
+  });
+
+  async function toggleProduct(id) {
+    try {
+      const data = await jsonpRequest(
+        `${API_URL}?action=toggle&key=${encodeURIComponent(adminKey)}&id=${encodeURIComponent(id)}`
+      );
+
+      if (!data.ok) throw new Error(data.error || 'No se pudo cambiar el estado');
+      toast('Estado actualizado ✓');
+      await loadProducts();
+    } catch (err) {
+      toast('Error: ' + err.message, false);
+    }
+  }
+
+  function askDelete(id) {
+    deleteId = id;
+    document.getElementById('confirmModal').classList.add('open');
+  }
+
+  document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+    document.getElementById('confirmModal').classList.remove('open');
+    deleteId = null;
+  });
+
+  document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+    if (!deleteId) return;
+
+    document.getElementById('confirmModal').classList.remove('open');
+
+    try {
+      const data = await jsonpRequest(
+        `${API_URL}?action=delete&key=${encodeURIComponent(adminKey)}&id=${encodeURIComponent(deleteId)}`
+      );
+
+      if (!data.ok) throw new Error(data.error || 'No se pudo eliminar');
+      toast('Producto eliminado');
+      await loadProducts();
+    } catch (err) {
+      toast('Error: ' + err.message, false);
+    } finally {
+      deleteId = null;
+    }
+  });
+
+  const fileInput = document.getElementById('fileInput');
+  const uploadZone = document.getElementById('uploadZone');
+  const uploadPrev = document.getElementById('uploadPreview');
+  const uploadStat = document.getElementById('uploadStatus');
+
+  uploadZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    uploadZone.classList.add('drag');
+  });
+
+  uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('drag');
+  });
+
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag');
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) handleFile(fileInput.files[0]);
+  });
+
+  async function handleFile(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      uploadPrev.src = e.target.result;
+      uploadPrev.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+
+    uploadStat.textContent = 'Subiendo imagen...';
+    uploadStat.className = 'upload-status';
+
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('upload_preset', CLOUDINARY_PRESET);
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST',
+        body: fd
+      });
+
+      const data = await res.json();
+
+      if (data.secure_url) {
+        document.getElementById('fieldImage').value = data.secure_url;
+        uploadStat.textContent = '✓ Imagen subida exitosamente';
+        uploadStat.className = 'upload-status ok';
+      } else {
+        throw new Error(data.error?.message || 'Error al subir');
+      }
+    } catch (err) {
+      uploadStat.textContent = '✗ Error: ' + err.message;
+      uploadStat.className = 'upload-status err';
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDrawer();
+      document.getElementById('confirmModal').classList.remove('open');
+    }
+  });
 </script>
 </body>
 </html>
