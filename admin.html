@@ -558,32 +558,36 @@
   });
 
   async function attemptLogin() {
-    const key = document.getElementById('keyInput').value.trim();
-    if (!key) return;
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) return;
 
-    const btn = document.getElementById('loginBtn');
-    const err = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
 
-    btn.textContent = 'Verificando...';
-    btn.disabled = true;
-    err.textContent = '';
+  btn.textContent = 'Verificando...';
+  btn.disabled = true;
+  err.textContent = '';
 
-    try {
-      const data = await jsonpRequest(`${API_URL}?action=list&key=${encodeURIComponent(key)}`);
-      if (data.ok) {
-        adminKey = key;
-        document.getElementById('loginOverlay').style.display = 'none';
-        await loadProducts();
-      } else {
-        err.textContent = 'Clave incorrecta. Intentá de nuevo.';
-      }
-    } catch (error) {
-      err.textContent = 'Error de conexión con la API.';
-    } finally {
-      btn.textContent = 'INGRESAR';
-      btn.disabled = false;
+  try {
+    // Usa 'verify' en lugar de 'list' — solo responde ok si la clave es correcta
+    const data = await jsonpRequest(
+      `${API_URL}?action=verify&key=${encodeURIComponent(key)}`
+    );
+
+    if (data.ok) {
+      adminKey = key;
+      document.getElementById('loginOverlay').style.display = 'none';
+      await loadProducts();
+    } else {
+      err.textContent = 'Clave incorrecta. Intentá de nuevo.';
     }
+  } catch (error) {
+    err.textContent = 'Error de conexión con la API.';
+  } finally {
+    btn.textContent = 'INGRESAR';
+    btn.disabled = false;
   }
+}
 
   document.getElementById('logoutBtn').addEventListener('click', () => {
     adminKey = '';
